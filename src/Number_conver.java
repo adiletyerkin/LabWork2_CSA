@@ -1,17 +1,9 @@
-import java.util.Locale;
 import java.util.Scanner;
 public class Number_conver {
-    //    public GUI(){
-//        JFrame frame = new JFrame();
-//        JPanel panel = new JPanel();
-//        panel.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
-//        panel.setLayout( new GridLayout(0, 1));
-//
-//    }
     public static String DecimalToBinary(int decimal) {
         String binary = "";
         while (decimal > 0) {
-            binary = decimal % 2 + binary; // здесь храню остаток от деления
+            binary = decimal % 2 + binary;
             decimal = decimal / 2;
         }
         return binary;
@@ -37,7 +29,6 @@ public class Number_conver {
     }
 
     public static int BinaryToDecimal(int binary) {
-        // int binary = Integer.parseInt(bin);
         int n = 0;
         int decimal = 0;
         while (binary != 0) {
@@ -94,63 +85,153 @@ public class Number_conver {
 
     public static int binaryproduct(int binary1, int binary2) {
 
-        int multiply = 0;
+        int mult = 0;
         int digit, factor = 1;
         while (binary2 != 0) {
             digit = (int) (binary2 % 10);
             if (digit == 1) {
                 binary1 = binary1 * factor;
-                multiply = product((int) binary1, (int) multiply);
+                mult = product((int) binary1, (int) mult);
             } else {
                 binary1 = binary1 * factor;
             }
             binary2 = binary2 / 10;
             factor = 10;
         }
-        return multiply;
+        return mult;
     }
 
 
     public static int product(int binary1, int binary2){
-        int i = 0, remainder = 0;
+        int i = 0, remain = 0;
         int[] sum = new int[20];
-        int binary_prod_result = 0;
+        int binary_prod = 0;
 
         while (binary1 != 0 || binary2 != 0)
         {
-            sum[i++] = (binary1 % 10 + binary2 % 10 + remainder) % 2;
-            remainder = (binary1 % 10 + binary2 % 10 + remainder) / 2;
+            sum[i++] = (binary1 % 10 + binary2 % 10 + remain) % 2;
+            remain = (binary1 % 10 + binary2 % 10 + remain) / 2;
             binary1 = binary1 / 10;
             binary2 = binary2 / 10;
         }
-        if (remainder != 0)
+        if (remain != 0)
         {
-            sum[i++] = remainder;
+            sum[i++] = remain;
         }
         --i;
         while (i >= 0)
         {
-            binary_prod_result = binary_prod_result * 10 + sum[i--];
+            binary_prod = binary_prod * 10 + sum[i--];
         }
-        return binary_prod_result;
+        return binary_prod;
     }
 
+    public static int AddingOctal ( int a, int b) {
+            int sum = 0, digit = 0, remin = 0, rank = 1;
+            while (a > 0 || b > 0 || remin  > 0) {
+                digit = a % 10 + b % 10 + remin;
+                if (digit > 7) {
+                    remin = 1;
+                    digit %= 8;
+                } else
+                    remin = 0;
+                sum += digit * rank;
+                rank = rank * 10;
+                a = a  /  10;
+                b = b / 10;
+            }
+            return sum;
+    }
 
 
 
 
 
     public static void main(String[] args) {
-        System.out.println(DecimalToBinary(5));
-        System.out.println(DecimalToOctal(16));
-        System.out.println(DecimalToHex(15));
-        System.out.println(BinaryToDecimal(10101));
-        System.out.println(OctalToDecimal(10));
-        System.out.println(HexToDecimal("25"));
-        System.out.println(addingBinary(11100, 10101));
-        System.out.println(binaryproduct(110, 101));
+        int n = 1;
+
+        Scanner scanner = new Scanner(System.in);
+        while (n != 0) {
+            System.out.println("Choose what do you want to ?");
+            System.out.println("Menu: ");
+            System.out.println("1. DecimalToBinary: ");
+            System.out.println("2. DecimalToOctal: ");
+            System.out.println("3. DecimalToHex: ");
+            System.out.println("4. BinaryToDecimal: ");
+            System.out.println("5. OctalToDecimal: ");
+            System.out.println("6. HexToDecimal: ");
+            System.out.println("7. Adding Binary: ");
+            System.out.println("8. Binary Product: ");
+            System.out.println("9. Adding Octal: ");
+            System.out.println("0. Exit: ");
+            int input = scanner.nextInt();
+            n = input;
+
+            if (n == 0){
+                System.exit(0);
+            }
+            else if(n == 1){
+                System.out.println("1. DecimalToBinary: ");
+                System.out.println("Enter: ");
+                int input1 = scanner.nextInt();
+                System.out.println(DecimalToBinary(input1));
+            }
+            else if(n == 2){
+                System.out.println("2. DecimalToOctal: ");
+                System.out.println("Enter: ");
+                int input1 = scanner.nextInt();
+                System.out.println(DecimalToOctal(input1));
+            }
+            else if(n == 3){
+                System.out.println("3. DecimalToHex: ");
+                System.out.println("Enter: ");
+                int input1 = scanner.nextInt();
+                System.out.println(DecimalToHex(input1));
+            }
+            else if(n == 4){
+                System.out.println("4. BinaryToDecimal: ");
+                System.out.println("Enter: ");
+                int input1 = scanner.nextInt();
+                System.out.println(BinaryToDecimal(input1));
+            }
+            else if(n == 5){
+                System.out.println("5. OctalToDecimal: ");
+                System.out.println("Enter: ");
+                int input1 = scanner.nextInt();
+                System.out.println(OctalToDecimal(input1));
+            }
+            else if(n == 6){
+                System.out.println("6. HexToDecimal: ");
+                System.out.println("Enter: ");
+                String input1 = scanner.next();
+                System.out.println(HexToDecimal(input1));
+            }
+            else if(n == 7){
+                System.out.println("7. Adding Binary: ");
+                System.out.println("Enter first number: ");
+                int input1 = scanner.nextInt();
+                System.out.println("Enter second number: ");
+                int input2 = scanner.nextInt();
+                System.out.println(addingBinary(input1, input2));
+            }
+            else if(n == 8){
+                System.out.println("8. Binary Product: ");
+                System.out.println("Enter first number: ");
+                int input1 = scanner.nextInt();
+                System.out.println("Enter second number: ");
+                int input2 = scanner.nextInt();
+                System.out.println(binaryproduct(input1, input2));
+            }
+            else if(n == 9){
+                System.out.println("9. Adding Octal: ");
+                System.out.println("Enter first number: ");
+                int input1 = scanner.nextInt();
+                System.out.println("Enter second number: ");
+                int input2 = scanner.nextInt();
+                System.out.println(AddingOctal(input1, input2));
+            }
+        }
 
     }
-
 
 }
